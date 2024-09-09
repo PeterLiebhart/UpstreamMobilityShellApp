@@ -1,0 +1,10 @@
+spring:
+    application:
+        name: "bored"
+
+    shell:
+        interactive:
+            enabled: true
+
+urls:
+    baseUrl: "https://bored-api.appbrewery.com"
