@@ -23,13 +23,12 @@ public class ActivityCommands {
     @ShellMethod(key = "random", value = "Returns a random activity. Specify a category using options.")
     public String randomCommand(
             @ShellOption(value = {"education", "social", "recreational", "cooking", "charity", "relaxation", "busywork"}, defaultValue = ShellOption.NULL, help = "Specify the category of the activity") String category,
-            @ShellOption(defaultValue = ShellOption.NULL, help = "Number of participants") Integer numberOfParticipants) {
+            @ShellOption(value = {"1", "2", "3", "4", "5", "6", "8"}, defaultValue = ShellOption.NULL, help = "Number of participants") Integer numberOfParticipants) {
 
         if (category == null) {
             return boredService.getRandomActivity();
         }
 
-        validateCategory(category);
 
         return getActivityFromCategory(category, Optional.ofNullable(numberOfParticipants));
     }
@@ -45,10 +44,4 @@ public class ActivityCommands {
         }
     }
 
-    private void validateCategory(String category) {
-        Set<String> validCategories = Set.of("education", "social", "recreational", "cooking", "charity", "relaxation", "busywork");
-        if (!validCategories.contains(category)) {
-            throw new IllegalArgumentException("Invalid category. Valid categories are: " + validCategories);
-        }
-    }
 }
