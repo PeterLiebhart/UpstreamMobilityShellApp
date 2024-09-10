@@ -22,7 +22,7 @@ public class ActivityCommands {
 
     @ShellMethod(key = "random", value = "Returns a random activity. Specify a category using options.")
     public String randomCommand(
-            @ShellOption(value = {"--education", "--social", "--recreational", "--cooking", "--charity", "--relaxation", "--busywork"}, defaultValue = ShellOption.NULL, help = "Specify the category of the activity") String category,
+            @ShellOption(value = {"education", "social", "recreational", "cooking", "charity", "relaxation", "busywork"}, defaultValue = ShellOption.NULL, help = "Specify the category of the activity") String category,
             @ShellOption(value = {"1", "2", "3", "4", "5", "6", "8"}, defaultValue = ShellOption.NULL, help = "Number of participants") Integer numberOfParticipants) {
 
         Optional<String> optionalCategory = Optional.ofNullable(category);
