@@ -24,14 +24,19 @@ public class BoredClient {
 
     public FetchedActivity fetchRandomActivity() {
         return fetchActivities(
-                String.format("%s/random", baseUrl)
+                String.format(
+                        "%s/random",
+                        baseUrl)
         )[1];
     }
 
     public FetchedActivity[] fetchAllActivitiesFromCategory(String category) {
 
         return fetchActivities(
-                String.format("%s/filter?type=%s", baseUrl, category)
+                String.format(
+                        "%s/filter?type=%s",
+                        baseUrl,
+                        category)
         );
 
     }
@@ -39,19 +44,23 @@ public class BoredClient {
     public FetchedActivity[] fetchAllActivitiesByCategoryAndParticipants(String category, int participants) {
 
         return fetchActivities(
-                String.format("%s/filter?type=%s&participants=%d", baseUrl, category, participants)
+                String.format(
+                        "%s/filter?type=%s&participants=%s",
+                        baseUrl,
+                        category,
+                        participants)
         );
 
     }
 
     private FetchedActivity[] fetchActivities(String url) {
+
         try {
             return Optional.ofNullable(restTemplate.getForObject(url, FetchedActivity[].class))
                     .orElseThrow(FetchedActivityIsNullException::new);
         } catch (HttpClientErrorException e) {
             throw new ResponseNotFoundException();
         }
+
     }
-
-
 }
