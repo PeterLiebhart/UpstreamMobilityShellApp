@@ -23,16 +23,17 @@ public class BoredClient {
     }
 
     public FetchedActivity fetchRandomActivity() {
-        return fetchActivities(
+
+        return fetchSingularActivity(
                 String.format(
                         "%s/random",
-                        baseUrl)
-        )[1];
+                        baseUrl));
+
     }
 
     public FetchedActivity[] fetchAllActivitiesFromCategory(String category) {
 
-        return fetchActivities(
+        return fetchActivityArray(
                 String.format(
                         "%s/filter?type=%s",
                         baseUrl,
@@ -43,7 +44,7 @@ public class BoredClient {
 
     public FetchedActivity[] fetchAllActivitiesByCategoryAndParticipants(String category, int participants) {
 
-        return fetchActivities(
+        return fetchActivityArray(
                 String.format(
                         "%s/filter?type=%s&participants=%s",
                         baseUrl,
@@ -53,13 +54,32 @@ public class BoredClient {
 
     }
 
-    private FetchedActivity[] fetchActivities(String url) {
+    private FetchedActivity fetchSingularActivity(String url) {
 
         try {
+
+            return Optional.ofNullable(restTemplate.getForObject(url, FetchedActivity.class))
+                    .orElseThrow(FetchedActivityIsNullException::new);
+
+        } catch (HttpClientErrorException e) {
+
+            throw new ResponseNotFoundException();
+
+        }
+
+    }
+
+    private FetchedActivity[] fetchActivityArray(String url) {
+
+        try {
+
             return Optional.ofNullable(restTemplate.getForObject(url, FetchedActivity[].class))
                     .orElseThrow(FetchedActivityIsNullException::new);
+
         } catch (HttpClientErrorException e) {
+
             throw new ResponseNotFoundException();
+
         }
 
     }
