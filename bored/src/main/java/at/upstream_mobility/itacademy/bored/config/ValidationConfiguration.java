@@ -10,11 +10,6 @@ import java.util.Set;
 public class ValidationConfiguration {
 
     @Bean
-    public Set<String> validCategories() {
-        return new HashSet<>(Set.of("education", "social", "recreational", "cooking", "charity", "relaxation", "busywork"));
-    }
-
-    @Bean
     public Set<Integer> validNumbersOfParticipants() {
         return new HashSet<>(Set.of(1,2,3,4,5,6,8));
     }

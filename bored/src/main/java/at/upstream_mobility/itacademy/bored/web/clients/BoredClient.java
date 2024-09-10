@@ -1,9 +1,11 @@
 package at.upstream_mobility.itacademy.bored.web.clients;
 
-import at.upstream_mobility.itacademy.bored.Exceptions.ActivityConversionFailedException;
+import at.upstream_mobility.itacademy.bored.Exceptions.FetchedActivityIsNullException;
+import at.upstream_mobility.itacademy.bored.Exceptions.ResponseNotFoundException;
 import at.upstream_mobility.itacademy.bored.data.FetchedActivity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
@@ -21,15 +23,35 @@ public class BoredClient {
     }
 
     public FetchedActivity fetchRandomActivity() {
-        return Optional.ofNullable(
-                restTemplate.getForObject(baseUrl + "/random", FetchedActivity.class))
-                .orElseThrow(ActivityConversionFailedException::new);
+        return fetchActivities(
+                String.format("%s/random", baseUrl)
+        )[1];
     }
 
     public FetchedActivity[] fetchAllActivitiesFromCategory(String category) {
-        return Optional.ofNullable(
-                restTemplate.getForObject(baseUrl + "/filter?type=" + category, FetchedActivity[].class))
-                .orElseThrow(ActivityConversionFailedException::new);
+
+        return fetchActivities(
+                String.format("%s/filter?type=%s", baseUrl, category)
+        );
+
     }
+
+    public FetchedActivity[] fetchAllActivitiesByCategoryAndParticipants(String category, int participants) {
+
+        return fetchActivities(
+                String.format("%s/filter?type=%s&participants=%d", baseUrl, category, participants)
+        );
+
+    }
+
+    private FetchedActivity[] fetchActivities(String url) {
+        try {
+            return Optional.ofNullable(restTemplate.getForObject(url, FetchedActivity[].class))
+                    .orElseThrow(FetchedActivityIsNullException::new);
+        } catch (HttpClientErrorException e) {
+            throw new ResponseNotFoundException();
+        }
+    }
+
 
 }
