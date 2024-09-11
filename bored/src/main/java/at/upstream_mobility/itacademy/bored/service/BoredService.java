@@ -5,8 +5,6 @@ import at.upstream_mobility.itacademy.bored.data.FetchedActivity;
 import at.upstream_mobility.itacademy.bored.Clients.BoredClient;
 import org.springframework.stereotype.Service;
 
-
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Random;
 
@@ -37,10 +35,6 @@ public class BoredService {
 
         } else {
             throw new ParticipantsWithoutCategoryException();
-        }
-
-        if (activities.length == 0) {
-            throw new NoSuchElementException("No activities found for the provided criteria.");
         }
 
         int randomIndex = new Random().nextInt(activities.length);
