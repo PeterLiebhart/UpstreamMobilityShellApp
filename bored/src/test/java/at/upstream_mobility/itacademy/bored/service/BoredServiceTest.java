@@ -1,7 +1,8 @@
 package at.upstream_mobility.itacademy.bored.service;
 
 import at.upstream_mobility.itacademy.bored.data.FetchedActivity;
-import at.upstream_mobility.itacademy.bored.controllers.BoredClient;
+import at.upstream_mobility.itacademy.bored.Clients.BoredClient;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,10 +23,15 @@ class BoredServiceTest {
     @Mock
     private BoredClient boredClient;
 
+    private FetchedActivity randomActivity;
+
+    @BeforeEach
+    void setup() {
+        randomActivity = new FetchedActivity("random", 0, "random", 0, 0, "random", "random", true, "random", "random");
+    }
+
     @Test
     void getRandomActivity_EmptyInput() {
-
-        FetchedActivity randomActivity = new FetchedActivity("random", 0, "random", 0, 0, "random", "random", true, "random", "random");
 
         Mockito.when(boredClient.fetchRandomActivity()).thenReturn(randomActivity);
 

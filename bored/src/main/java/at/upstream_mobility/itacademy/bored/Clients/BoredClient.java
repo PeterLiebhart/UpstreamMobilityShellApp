@@ -1,16 +1,17 @@
-package at.upstream_mobility.itacademy.bored.controllers;
+package at.upstream_mobility.itacademy.bored.Clients;
 
 import at.upstream_mobility.itacademy.bored.Exceptions.FetchedActivityIsNullException;
 import at.upstream_mobility.itacademy.bored.Exceptions.ResponseNotFoundException;
 import at.upstream_mobility.itacademy.bored.data.FetchedActivity;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
-@Controller
+@Component
 public class BoredClient {
 
     private final RestTemplate restTemplate;

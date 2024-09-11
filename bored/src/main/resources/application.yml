@@ -5,6 +5,5 @@ spring:
     shell:
         interactive:
             enabled: true
-
 urls:
     baseUrl: "https://bored-api.appbrewery.com"

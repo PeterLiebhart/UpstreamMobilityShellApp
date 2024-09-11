@@ -1,5 +1,6 @@
-package at.upstream_mobility.itacademy.bored.controllers;
+package at.upstream_mobility.itacademy.bored.clients;
 
+import at.upstream_mobility.itacademy.bored.Clients.BoredClient;
 import at.upstream_mobility.itacademy.bored.data.FetchedActivity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
