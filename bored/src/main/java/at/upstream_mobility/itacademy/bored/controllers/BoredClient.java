@@ -1,4 +1,4 @@
-package at.upstream_mobility.itacademy.bored.web.clients;
+package at.upstream_mobility.itacademy.bored.controllers;
 
 import at.upstream_mobility.itacademy.bored.Exceptions.FetchedActivityIsNullException;
 import at.upstream_mobility.itacademy.bored.Exceptions.ResponseNotFoundException;

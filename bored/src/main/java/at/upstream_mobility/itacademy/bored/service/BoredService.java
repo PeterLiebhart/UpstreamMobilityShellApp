@@ -2,7 +2,7 @@ package at.upstream_mobility.itacademy.bored.service;
 
 import at.upstream_mobility.itacademy.bored.Exceptions.ParticipantsWithoutCategoryException;
 import at.upstream_mobility.itacademy.bored.data.FetchedActivity;
-import at.upstream_mobility.itacademy.bored.web.clients.BoredClient;
+import at.upstream_mobility.itacademy.bored.controllers.BoredClient;
 import org.springframework.stereotype.Service;
 
 
