@@ -7,3 +7,10 @@ spring:
             enabled: true
 urls:
     baseUrl: "https://bored-api.appbrewery.com"
+
+logging:
+    level:
+        root: ERROR
+        org.springframework.shell: ERROR
+        org.jline: ERROR
+        web: ERROR

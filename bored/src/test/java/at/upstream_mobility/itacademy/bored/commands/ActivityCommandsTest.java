@@ -1,11 +1,13 @@
 package at.upstream_mobility.itacademy.bored.commands;
 
+import at.upstream_mobility.itacademy.bored.config.ValidationConfiguration;
 import at.upstream_mobility.itacademy.bored.service.BoredService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.shell.test.ShellAssertions;
 import org.springframework.shell.test.ShellTestClient;
 import org.springframework.shell.test.autoconfigure.ShellTest;
@@ -18,6 +20,7 @@ import static org.awaitility.Awaitility.await;
 
 @ShellTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Import(ValidationConfiguration.class)
 class ActivityCommandsTest {
 
     @Autowired
@@ -74,9 +77,9 @@ class ActivityCommandsTest {
     @Test
     void random_withCategory() {
 
-        Mockito.when(boredService.getRandomActivity(Optional.of("example"), Optional.empty())).thenReturn("only category");
+        Mockito.when(boredService.getRandomActivity(Optional.of("busywork"), Optional.empty())).thenReturn("only category");
 
-        shellSession.write(shellSession.writeSequence().text("random example").carriageReturn().build());
+        shellSession.write(shellSession.writeSequence().text("random busywork").carriageReturn().build());
         await().atMost(5, TimeUnit.SECONDS).untilAsserted(() -> {
             ShellAssertions.assertThat(shellSession.screen())
                     .containsText("only category");
@@ -86,10 +89,10 @@ class ActivityCommandsTest {
     @Test
     void random_withCategoryAndParticipant() {
 
-        Mockito.when(boredService.getRandomActivity(Optional.of("example"), Optional.of(1))).thenReturn("category and participants");
+        Mockito.when(boredService.getRandomActivity(Optional.of("busywork"), Optional.of(1))).thenReturn("category and participants");
 
 
-        shellSession.write(shellSession.writeSequence().text("random example 1").carriageReturn().build());
+        shellSession.write(shellSession.writeSequence().text("random busywork 1").carriageReturn().build());
         await().atMost(5, TimeUnit.SECONDS).untilAsserted(() -> {
             ShellAssertions.assertThat(shellSession.screen())
                     .containsText("category and participants");

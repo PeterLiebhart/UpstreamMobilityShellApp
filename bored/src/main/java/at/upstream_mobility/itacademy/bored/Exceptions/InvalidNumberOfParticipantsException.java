@@ -6,7 +6,7 @@ public class InvalidNumberOfParticipantsException extends RuntimeException {
 
     public InvalidNumberOfParticipantsException(Integer numberOfParticipants, Set<Integer> validNumbersOfParticipants) {
         super(String.format(
-                "Invalid number of participants: '%d'. Allowed numbers: %s",
+                "Invalid number of participants: '%s'. Allowed numbers: %s",
                 numberOfParticipants,
                 validNumbersOfParticipants
         ));
